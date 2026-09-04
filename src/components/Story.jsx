@@ -415,7 +415,7 @@ export function Story() {
     >
       <div
         id="story-stage"
-        className="sticky top-0 h-svh min-h-[42rem] overflow-hidden bg-[#f4eee2] text-ink"
+        className="sticky top-0 h-lvh min-h-[42rem] overflow-hidden bg-[#f4eee2] text-ink"
       >
         <JourneyMap
           containerRef={mapContainerRef}

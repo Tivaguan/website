@@ -93,7 +93,7 @@ export function Drinks({ activeId, onSelect }) {
   return (
     <section
       id="drinks"
-      className="site-gutter relative flex min-h-svh overflow-hidden pt-28 pb-10 transition-colors duration-700"
+      className="site-gutter relative flex min-h-lvh overflow-hidden pt-28 pb-10 transition-colors duration-700"
       style={{ backgroundColor: active.background }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
