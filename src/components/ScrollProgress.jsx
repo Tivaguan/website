@@ -42,7 +42,7 @@ export function ScrollProgress() {
       className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-[3px] bg-ink/[0.06]"
       aria-hidden
     >
-      <div ref={bar} className="h-full w-full origin-left scale-x-0 bg-matcha" />
+      <div ref={bar} className="h-full w-full origin-left bg-matcha" style={{ transform: 'scaleX(0)' }} />
     </div>
   )
 }
