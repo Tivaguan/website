@@ -33,8 +33,8 @@ export function Footer() {
   return (
     <footer className="relative z-[60] overflow-hidden bg-ink text-[#f6f1e7]">
       <div className="site-gutter relative pt-14 pb-8 md:pt-20 md:pb-10">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.35fr)_minmax(10rem,0.45fr)_minmax(14rem,0.65fr)] lg:gap-16">
-          <div className="md:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-2 gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(10rem,0.45fr)_minmax(14rem,0.65fr)] lg:gap-16">
+          <div className="col-span-2 lg:col-span-1">
             <p className="font-display text-[clamp(3.5rem,6vw,6.5rem)] leading-[0.84] font-semibold tracking-[-0.045em] uppercase">
               Follow
               <br />
