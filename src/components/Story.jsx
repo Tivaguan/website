@@ -265,7 +265,18 @@ export function Story() {
 
     const mm = gsap.matchMedia()
 
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Phones open on a wider, lower crop of the world map so the full
+    // route and both city labels sit below the story card.
+    mm.add(
+      {
+        motionOk: '(prefers-reduced-motion: no-preference)',
+        mobile: '(max-width: 767px)',
+      },
+      (gctx) => {
+      if (!gctx.conditions.motionOk) return
+      const startViewBox = gctx.conditions.mobile
+        ? '0 -420 1000 1100'
+        : '0 0 1000 720'
       const hold = { progress: 0 }
       const visitController = visitRef.current
       const worldMapContainer = mapContainerRef.current
@@ -276,7 +287,7 @@ export function Story() {
         gsap.set(contentRef.current, { autoAlpha: 1, y: 0 })
         gsap.set(annotationsRef.current, { autoAlpha: 1 })
         gsap.set(mapSvgRef.current, {
-          attr: { viewBox: '0 0 1000 720' },
+          attr: { viewBox: startViewBox },
         })
       }
 
@@ -351,9 +362,21 @@ export function Story() {
         resetHandoff()
         handoff.kill()
       }
-    })
+      },
+    )
 
-    mm.add('(prefers-reduced-motion: reduce)', () => {
+    mm.add(
+      {
+        motionReduce: '(prefers-reduced-motion: reduce)',
+        mobile: '(max-width: 767px)',
+      },
+      (gctx) => {
+      if (!gctx.conditions.motionReduce) return
+      gsap.set(mapSvgRef.current, {
+        attr: {
+          viewBox: gctx.conditions.mobile ? '0 -420 1000 1100' : '0 0 1000 720',
+        },
+      })
       const visitController = visitRef.current
       const worldMapContainer = mapContainerRef.current
       const storyContent = contentRef.current
@@ -378,7 +401,8 @@ export function Story() {
       })
 
       return () => switchToVisit.kill()
-    })
+      },
+    )
 
     return () => mm.revert()
   }, [])
@@ -404,18 +428,18 @@ export function Story() {
           ref={contentRef}
           className="site-gutter relative z-10 min-h-svh pt-24 pb-12 md:pt-28 md:pb-14"
         >
-          <article className="max-w-[31rem] rounded-[1.5rem] bg-[#f6f1e7]/88 p-6 backdrop-blur-md md:absolute md:top-[15%] md:left-[max(2rem,8vw,calc((100vw-90rem)/2))] md:p-0 md:bg-transparent md:backdrop-blur-none">
+          <article className="max-w-[31rem] rounded-[1.5rem] bg-[#f6f1e7]/88 p-5 backdrop-blur-md md:absolute md:top-[15%] md:left-[max(2rem,8vw,calc((100vw-90rem)/2))] md:p-0 md:bg-transparent md:backdrop-blur-none">
             <p className="text-[10px] font-bold tracking-[0.2em] text-ink/45 uppercase">
               Our story
             </p>
 
-            <h2 className="mt-7 font-display text-[clamp(3.8rem,6.2vw,6.8rem)] leading-[0.82] font-bold tracking-[-0.055em] uppercase">
+            <h2 className="mt-4 font-display text-[2.1rem] leading-[0.82] md:mt-7 md:text-[clamp(3.8rem,6.2vw,6.8rem)] font-bold tracking-[-0.055em] uppercase">
               From Amsterdam
               <br />
               to Rabat.
             </h2>
 
-            <p className="mt-7 max-w-md text-base leading-[1.65] text-ink/70 md:text-lg">
+            <p className="mt-4 max-w-md text-[15px] leading-[1.65] text-ink/70 md:mt-7 md:text-lg">
               We loved matcha long before MATCHAI existed. But in Morocco,
               finding a cup made with the quality and care we knew was harder
               than it should have been. So we left Amsterdam for Rabat and
@@ -423,7 +447,7 @@ export function Story() {
             </p>
           </article>
 
-          <article className="mt-[34rem] max-w-xl rounded-[1.5rem] bg-[#f6f1e7]/90 p-6 backdrop-blur-md md:absolute md:right-[max(2rem,8vw,calc((100vw-90rem)/2))] md:bottom-[8%] md:mt-0 md:w-[min(34rem,36vw)] md:p-7">
+          <article className="mt-[34rem] hidden max-w-xl md:block rounded-[1.5rem] bg-[#f6f1e7]/90 p-6 backdrop-blur-md md:absolute md:right-[max(2rem,8vw,calc((100vw-90rem)/2))] md:bottom-[8%] md:mt-0 md:w-[min(34rem,36vw)] md:p-7">
             <p className="text-base leading-[1.7] text-ink/68 md:text-lg">
               To us, matcha is more than a drink. It is a small ritual that
               brings balance, clarity and energy to the day. We pair Japanese

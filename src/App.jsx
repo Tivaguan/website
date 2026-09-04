@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Hero } from './components/Hero'
 import { Header } from './components/Header'
+import { ScrollProgress } from './components/ScrollProgress'
 import { Welcome } from './components/Welcome'
 import { Drinks } from './components/Drinks'
 import { Experience } from './components/Experience'
@@ -39,13 +40,17 @@ export default function App() {
       },
       (context) => {
         const { desktop, reduceMotion } = context.conditions
+        const heroDestination = desktop
+          ? CUP_STATES.hero
+          : { ...CUP_STATES.hero, y: -0.55, scale: 0.6 }
+        if (!desktop) Object.assign(cupTransform, heroDestination)
         const destination = desktop
           ? CUP_STATES.welcome
           : {
               ...CUP_STATES.welcome,
               x: 0.55,
-              y: 0.62,
-              scale: 0.72,
+              y: 0.92,
+              scale: 0.54,
               rotY: -0.18,
             }
         const drinksDestination = desktop
@@ -73,7 +78,7 @@ export default function App() {
             trigger: '#welcome',
             start: 'top 55%',
             onEnter: () => Object.assign(cupTransform, destination),
-            onLeaveBack: () => setCupState('hero'),
+            onLeaveBack: () => Object.assign(cupTransform, heroDestination),
           })
           const drinksTrigger = ScrollTrigger.create({
             trigger: '#drinks',
@@ -279,6 +284,7 @@ export default function App() {
 
   return (
     <div ref={root}>
+      <ScrollProgress />
       <Header />
 
       <div ref={cupShadow} className="cup-drop-shadow" aria-hidden />

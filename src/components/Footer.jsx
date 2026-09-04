@@ -44,7 +44,7 @@ export function Footer() {
             <a
               href="#home"
               onClick={scrollToSection}
-              className="group mt-8 inline-flex items-center gap-3 py-2 text-[10px] font-semibold tracking-[0.16em] text-white/55 uppercase transition-colors hover:text-white"
+              className="group mt-8 inline-flex items-center gap-3 py-3 text-[10px] font-semibold tracking-[0.16em] text-white/55 uppercase transition-colors hover:text-white"
             >
               Back to top
               <span
@@ -60,13 +60,13 @@ export function Footer() {
             <p className="mb-5 text-[9px] font-semibold tracking-[0.2em] text-white/35 uppercase">
               Explore
             </p>
-            <div className="flex flex-col items-start gap-3">
+            <div className="-my-1 flex flex-col items-start gap-1">
               {FOOTER_LINKS.map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
                   onClick={scrollToSection}
-                  className="font-display text-xl leading-none font-medium tracking-[-0.015em] text-white/65 uppercase transition-colors hover:text-white md:text-2xl"
+                  className="py-2.5 font-display text-xl leading-none font-medium tracking-[-0.015em] text-white/65 uppercase transition-colors hover:text-white md:text-2xl"
                 >
                   {label}
                 </a>
@@ -78,14 +78,14 @@ export function Footer() {
             <p className="mb-5 text-[9px] font-semibold tracking-[0.2em] text-white/35 uppercase">
               Elsewhere
             </p>
-            <div className="flex flex-col items-start gap-3">
+            <div className="-my-1 flex flex-col items-start gap-1">
               {EXTERNAL_LINKS.map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 font-display text-xl leading-none font-medium tracking-[-0.015em] text-white/65 uppercase transition-colors hover:text-white md:text-2xl"
+                  className="group inline-flex items-center gap-2 py-2.5 font-display text-xl leading-none font-medium tracking-[-0.015em] text-white/65 uppercase transition-colors hover:text-white md:text-2xl"
                 >
                   {label}
                   <span

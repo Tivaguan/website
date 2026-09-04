@@ -15,7 +15,7 @@ function PhoneMockup({ variant }) {
 
   return (
     <figure
-      className={`relative w-[clamp(13.5rem,19vw,18rem)] ${
+      className={`relative w-[clamp(8.5rem,38vw,13.5rem)] sm:w-[clamp(13.5rem,19vw,18rem)] ${
         isApple ? 'rotate-[-7deg]' : 'rotate-[6deg]'
       }`}
     >
@@ -83,9 +83,9 @@ export function Loyalty() {
         </p>
       </div>
 
-      <div className="site-gutter relative grid min-h-svh items-center gap-16 py-28 lg:grid-cols-[0.82fr_1.18fr] lg:gap-8">
+      <div className="site-gutter relative grid min-h-svh items-center gap-10 py-24 sm:gap-16 sm:py-28 lg:grid-cols-[0.82fr_1.18fr] lg:gap-8">
         <article className="relative z-10 max-w-[35rem]">
-          <h2 className="font-display text-[clamp(4.2rem,7vw,7.5rem)] leading-[0.82] font-bold tracking-[-0.055em] uppercase">
+          <h2 className="font-display text-[clamp(2.75rem,11vw,4.2rem)] sm:text-[clamp(4.2rem,7vw,7.5rem)] leading-[0.82] font-bold tracking-[-0.055em] uppercase">
             Sip, Stamp,
             <br />
             Repeat.
@@ -112,7 +112,7 @@ export function Loyalty() {
           </a>
         </article>
 
-        <div className="relative flex min-h-[42rem] items-center justify-center lg:min-h-[48rem]">
+        <div className="relative flex min-h-[26rem] items-center justify-center sm:min-h-[42rem] lg:min-h-[48rem]">
           <div className="absolute inset-x-[8%] bottom-[10%] h-[14%] rounded-[50%] bg-ink/12 blur-3xl" />
           <div className="relative flex items-center justify-center gap-0 sm:gap-4">
             <div className="relative z-20 translate-x-5 translate-y-10 sm:translate-x-8">

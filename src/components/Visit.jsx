@@ -41,6 +41,10 @@ function ensurePmtilesProtocol() {
 
 export const Visit = forwardRef(function Visit(_, progressRef) {
   const layerRef = useRef()
+  const mobileQueryRef = useRef(null)
+  if (mobileQueryRef.current === null) {
+    mobileQueryRef.current = window.matchMedia('(max-width: 767px)')
+  }
   const mapContainer = useRef()
   const mapRef = useRef()
   const detailsRef = useRef()
@@ -72,12 +76,19 @@ export const Visit = forwardRef(function Visit(_, progressRef) {
         requestAnimationFrame(() => map.resize())
       }
 
+      const mobileShift = mobileQueryRef.current.matches ? detailsP : 0
       map.jumpTo({
         center: [
           gsap.utils.interpolate(RABAT.lng, SHOP.lng, zoomP),
           gsap.utils.interpolate(RABAT.lat, SHOP.lat, zoomP),
         ],
         zoom: START_ZOOM + (END_ZOOM - START_ZOOM) * zoomP,
+        padding: {
+          top: 0,
+          left: 0,
+          right: 120 * mobileShift,
+          bottom: 300 * mobileShift,
+        },
       })
     }
 
@@ -224,9 +235,9 @@ export const Visit = forwardRef(function Visit(_, progressRef) {
         <div className="pointer-events-none absolute top-24 right-4 z-[8] md:top-1/2 md:right-[max(2rem,10vw)] md:-translate-y-1/2">
           <figure
             ref={storeCardRef}
-            className="invisible w-[min(21rem,calc(100vw-2rem))] origin-bottom rotate-[-4deg] opacity-0 md:w-[min(30rem,30vw)]"
+            className="invisible w-40 origin-bottom rotate-[-4deg] opacity-0 sm:w-[min(21rem,calc(100vw-4rem))] md:w-[min(30rem,30vw)]"
           >
-            <div className="rounded-[1.35rem] border border-white/80 bg-[#f6f1e7] p-2.5 shadow-[0_1.75rem_5rem_rgba(25,31,21,0.28)] md:rounded-[1.75rem] md:p-3">
+            <div className="rounded-[1.1rem] border border-white/80 bg-[#f6f1e7] p-1.5 sm:rounded-[1.35rem] sm:p-2.5 shadow-[0_1.75rem_5rem_rgba(25,31,21,0.28)] md:rounded-[1.75rem] md:p-3">
               <div className="overflow-hidden rounded-[0.95rem] bg-[#e9e4d9] md:rounded-[1.25rem]">
                 <img
                   src="/images/matchai-storefront-clean.webp"
@@ -245,7 +256,7 @@ export const Visit = forwardRef(function Visit(_, progressRef) {
           ref={detailsRef}
           className="site-gutter invisible pointer-events-none absolute inset-0 flex items-end pb-6 pt-24 opacity-0 md:items-center md:pb-0"
         >
-          <div className="pointer-events-auto w-full max-w-[30rem] rounded-[1.75rem] border border-white/50 bg-[#f6f1e7]/88 p-6 shadow-[0_1.5rem_4rem_rgba(45,50,36,0.12)] backdrop-blur-xl md:p-9">
+          <div className="pointer-events-auto w-full max-w-[30rem] rounded-[1.5rem] border border-white/50 bg-[#f6f1e7]/88 p-5 md:rounded-[1.75rem] md:p-6 shadow-[0_1.5rem_4rem_rgba(45,50,36,0.12)] backdrop-blur-xl md:p-9">
             <div className="flex items-center justify-between">
               <p className="text-[10px] font-bold tracking-[0.2em] text-ink/50 uppercase">
                 Visit us
@@ -255,23 +266,23 @@ export const Visit = forwardRef(function Visit(_, progressRef) {
               </p>
             </div>
 
-            <h2 className="mt-5 font-display text-[clamp(2.8rem,5vw,5rem)] leading-[0.85] font-bold tracking-[-0.05em] uppercase">
+            <h2 className="mt-3 font-display text-[2rem] leading-[0.85] md:mt-5 md:text-[clamp(2.8rem,5vw,5rem)] font-bold tracking-[-0.05em] uppercase">
               Find us in
               <br />
               Agdal.
             </h2>
 
-            <p className="mt-6 text-base leading-[1.6] text-ink/70 md:text-lg">
+            <p className="mt-3 text-sm leading-[1.6] text-ink/70 md:mt-6 md:text-lg">
               72 Rue Oued Moulouya
               <br />
               Agdal, Rabat 10000
             </p>
 
-            <dl className="mt-5 border-t border-ink/15 pt-4 md:mt-6 md:pt-5">
+            <dl className="mt-3 border-t border-ink/15 pt-3 md:mt-6 md:pt-5">
               {HOURS.map(([day, hours]) => (
                 <div
                   key={day}
-                  className="flex items-baseline justify-between py-0.5 text-[13px] md:py-1 md:text-base"
+                  className="flex items-baseline justify-between py-0 text-[12px] md:py-1 md:text-base"
                 >
                   <dt className="font-semibold tracking-[0.02em] text-ink/80">
                     {day}
@@ -285,7 +296,7 @@ export const Visit = forwardRef(function Visit(_, progressRef) {
               href={DIRECTIONS_URL}
               target="_blank"
               rel="noreferrer"
-              className="group mt-5 inline-flex items-center gap-3 rounded-full bg-matcha px-6 py-3.5 text-[11px] font-bold tracking-[0.11em] text-white uppercase transition-colors hover:bg-ink md:mt-7"
+              className="group mt-4 inline-flex items-center gap-3 rounded-full bg-matcha px-5 py-3 md:mt-5 md:px-6 md:py-3.5 text-[11px] font-bold tracking-[0.11em] text-white uppercase transition-colors hover:bg-ink md:mt-7"
             >
               Get directions
               <span
