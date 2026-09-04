@@ -15,7 +15,7 @@ function PhoneMockup({ variant }) {
 
   return (
     <figure
-      className={`relative w-[clamp(8.5rem,38vw,13.5rem)] sm:w-[clamp(13.5rem,19vw,18rem)] ${
+      className={`relative w-[clamp(10rem,44vw,13.5rem)] sm:w-[clamp(13.5rem,19vw,18rem)] ${
         isApple ? 'rotate-[-7deg]' : 'rotate-[6deg]'
       }`}
     >
@@ -112,7 +112,7 @@ export function Loyalty() {
           </a>
         </article>
 
-        <div className="relative flex min-h-[26rem] items-center justify-center sm:min-h-[42rem] lg:min-h-[48rem]">
+        <div className="relative flex min-h-[30rem] items-center justify-center sm:min-h-[42rem] lg:min-h-[48rem]">
           <div className="absolute inset-x-[8%] bottom-[10%] h-[14%] rounded-[50%] bg-ink/12 blur-3xl" />
           <div className="relative flex items-center justify-center gap-0 sm:gap-4">
             <div className="relative z-20 translate-x-5 translate-y-10 sm:translate-x-8">

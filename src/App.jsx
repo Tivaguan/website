@@ -49,8 +49,8 @@ export default function App() {
           : {
               ...CUP_STATES.welcome,
               x: 0.55,
-              y: 0.92,
-              scale: 0.54,
+              y: 0.78,
+              scale: 0.62,
               rotY: -0.18,
             }
         const drinksDestination = desktop
@@ -169,9 +169,9 @@ export default function App() {
           },
         })
 
-        // Begin responding immediately when the pinned journey starts. The UI
-        // fade occupies the opening beat, then flows directly into the cup dive.
-        const experienceZoomStart = 0.1
+        // Let the cup rest at its Drinks position for the first third of the
+        // pinned scroll, then fade the UI and run the dive in the back part.
+        const experienceZoomStart = 0.35
 
         experienceZoom
           .to(
@@ -181,7 +181,7 @@ export default function App() {
           )
           .to(
             cupTransform,
-            { ...experienceDestination, duration: 1, ease: 'none' },
+            { ...experienceDestination, duration: 0.75, ease: 'none' },
             experienceZoomStart,
           )
           .to(
@@ -190,7 +190,7 @@ export default function App() {
               y: '-32vh',
               scale: 0.16,
               opacity: 0,
-              duration: 0.7,
+              duration: 0.52,
               ease: 'none',
             },
             experienceZoomStart,
@@ -198,14 +198,14 @@ export default function App() {
           .fromTo(
             experienceWash.current,
             { opacity: 0 },
-            { opacity: 1, duration: 0.58, ease: 'none' },
-            experienceZoomStart + 0.36,
+            { opacity: 1, duration: 0.44, ease: 'none' },
+            experienceZoomStart + 0.27,
           )
           .fromTo(
             cupLayer.current,
             { opacity: 1 },
-            { opacity: 0, duration: 0.46, ease: 'none' },
-            experienceZoomStart + 0.48,
+            { opacity: 0, duration: 0.35, ease: 'none' },
+            experienceZoomStart + 0.36,
           )
 
         const copyTween = gsap.fromTo(
