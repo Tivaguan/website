@@ -39,7 +39,7 @@ export function ScrollProgress() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-ink/[0.06]"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-[3px] bg-ink/[0.06]"
       aria-hidden
     >
       <div ref={bar} className="h-full w-full origin-left scale-x-0 bg-matcha" />
