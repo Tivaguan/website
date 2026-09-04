@@ -33,8 +33,10 @@ export function Header() {
   useEffect(() => {
     if (!menuOpen) return
 
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    // The page scrolls on <html> (body only clips overflow-x), so lock the
+    // document element while the panel is open.
+    const previousOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
 
     const onKeyDown = (event) => {
       if (event.key === 'Escape') setMenuOpen(false)
@@ -42,7 +44,7 @@ export function Header() {
     window.addEventListener('keydown', onKeyDown)
 
     return () => {
-      document.body.style.overflow = previousOverflow
+      document.documentElement.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
     }
   }, [menuOpen])
@@ -53,6 +55,7 @@ export function Header() {
   }
 
   return (
+    <>
     <header className="site-gutter fixed inset-x-0 top-0 z-40 flex h-20 items-center justify-between border-b border-ink/[0.07] bg-white/90 backdrop-blur-xl">
       <a
         href="#home"
@@ -120,27 +123,31 @@ export function Header() {
         </button>
       </div>
 
-      <div
-        id="mobile-menu"
-        hidden={!menuOpen}
-        className="fixed inset-x-0 top-20 bottom-0 z-30 bg-white/97 backdrop-blur-xl lg:hidden"
-      >
-        <nav
-          aria-label="Mobile navigation"
-          className="site-gutter flex h-full flex-col justify-center gap-1 pb-24"
-        >
-          {LINKS.map(([label, href]) => (
-            <a
-              key={label}
-              href={href}
-              onClick={handleMenuNavigate}
-              className="border-b border-ink/[0.07] py-4 font-display text-[2rem] leading-none font-bold tracking-[-0.04em] text-ink uppercase"
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-      </div>
     </header>
+
+    {/* Sibling of the header: the header's backdrop-filter would otherwise
+        become the containing block and pin this panel to the header box. */}
+    <div
+      id="mobile-menu"
+      hidden={!menuOpen}
+      className="fixed inset-x-0 top-20 bottom-0 z-30 bg-white/97 backdrop-blur-xl lg:hidden"
+    >
+      <nav
+        aria-label="Mobile navigation"
+        className="site-gutter flex h-full flex-col justify-center gap-1 pb-24"
+      >
+        {LINKS.map(([label, href]) => (
+          <a
+            key={label}
+            href={href}
+            onClick={handleMenuNavigate}
+            className="border-b border-ink/[0.07] py-4 font-display text-[2rem] leading-none font-bold tracking-[-0.04em] text-ink uppercase"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
+    </>
   )
 }
