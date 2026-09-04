@@ -28,6 +28,7 @@ export default function App() {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.config({ ignoreMobileResize: true })
     setCupState('hero')
 
     const mm = gsap.matchMedia()
@@ -291,7 +292,7 @@ export default function App() {
 
       <div
         ref={cupLayer}
-        className="pointer-events-none fixed inset-0 z-10 will-change-[opacity]"
+        className="pointer-events-none fixed inset-x-0 top-0 z-10 h-[100lvh] will-change-[opacity]"
         aria-hidden
       >
         <CupScene
