@@ -13,7 +13,11 @@ import { buildVisitMapStyle } from './visitMapStyle'
 // MATCHAI — 72 Rue Oued Moulouya, Agdal, Rabat
 const SHOP = { lng: -6.8476784981478245, lat: 33.997098933931994 }
 const RABAT = { lng: -6.8498, lat: 34.0209 }
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${SHOP.lat},${SHOP.lng}`
+// Send directions to the business by name and address so Google Maps lands
+// on the real MATCHAI listing instead of raw coordinates beside it.
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  'MATCHAI, 72 Rue Oued Moulouya, Agdal, Rabat',
+)}`
 
 // The local archive covers roughly 21 × 22 km around Rabat. Starting at this
 // zoom fills a wide desktop viewport instead of exposing the archive edges.
